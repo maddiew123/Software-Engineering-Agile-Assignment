@@ -1,12 +1,28 @@
 
 
 import { useQuery } from "@tanstack/react-query";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router";
 export default function Profile() {
   const navigate = useNavigate();
 
+   const token = localStorage.getItem("tokenya");
+  let name = "";
+  let team = "";
+  let
+
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      console.log(decoded)
+      name = decoded.full_name; // assuming your token contains "username"
+    } catch (e) {
+      console.error("Invalid token", e);
+    }
+  }
+
   const signOut = () => {
-    localStorage.removeItem("temitope");
+    localStorage.removeItem("tokenya");
     navigate("/");
   };
 
@@ -20,6 +36,8 @@ export default function Profile() {
     queryFn: fetchUsers,
   });
 
+
+
   return (
     <>
       <div style={{ marginTop: 20, minHeight: 700 }}>
@@ -28,7 +46,7 @@ export default function Profile() {
         {!isPending && !error &&(
             <>
             <h1>Profile page</h1>
-            <p>Hello {data.full_name}, welcome to your profile page</p>
+            <p>Hello {name}, welcome to your profile page</p>
 </>
         )}
        
