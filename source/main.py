@@ -1,7 +1,7 @@
 from datetime import date, timedelta
 import random
 from unittest.mock import Base
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 import jwt
@@ -106,7 +106,7 @@ for i in range(1, 11):
             location=random.choice(locations),
             date=date.today() + timedelta(days=i),
             opponent_team_id=random.randint(1, 10),
-            home_team_id=random.randint(1, 10)
+            home_team_id=2
         )
     session.add(match)
 
@@ -161,3 +161,20 @@ async def user_login(loginitem:LoginItem):
         return {"token": encoded_jwt}
     else:
         return {"message": "login_failed"}
+    
+@app.get("/team/{team_id}")
+def get_team_name(team_id: int):
+    team = session.query(Team).filter(Team.team_id == team_id).first()
+    if team:
+        return {"team_name": team.team_name}
+    else:
+        return {"team_name": "Unknown Team"}
+    
+@app.get("/match/{team_id}")
+def get_user_match(team_id: int):
+    match = session.query(Match).filter(Match.home_team_id == team_id).all()
+    if match:
+        return {"user_match": match}
+    else:
+        return {"team_name": "Unknown Team"}
+
