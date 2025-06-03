@@ -1,6 +1,7 @@
 
 
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
@@ -57,6 +58,12 @@ export default function Profile() {
     navigate("/");
   };
 
+
+    const createNewMatch = () => {
+    
+    navigate("/new-match");
+  };
+
   const fetchUsers = async () => {
     const res = await fetch("http://localhost:8000/")
     return res.json();
@@ -80,15 +87,17 @@ export default function Profile() {
            
   
           
-              {userMatches.map((match) => {
+              {(userMatches.length == 0) ?
+                  <p>you have no matches</p> :
+                userMatches.map((match) => {
         
-                return <MatchCard element={match}/> 
+                return <MatchCard element={match} index={match.match_id}/> 
            
-            })}  
+            }) }
 </>   
         )}
         <div>
-          {role == "Coach" ? ( <button >add match</button>) : (<></>) }
+          {role == "Manager" ? ( <button onClick={createNewMatch} >add match</button>) : (<></>) }
         </div>
        
         <button onClick={signOut}>sign out</button>
@@ -118,18 +127,38 @@ function useTeamName(team: number) {
   return teamName
 }
 
-function MatchCard({ element }: {element: object}) {
+function MatchCard({ element ,index}: {element: object, index: number}) {
   const homeTeamName = useTeamName(element.home_team_id);
   const opponentTeamName = useTeamName(element.opponent_team_id);
-
+    
   return (
-    <div style={{border:"5", color:"red"}}>
+    <div key={index} style={{border:"5", color:"red"}}>
       <p>{homeTeamName} VS {opponentTeamName}</p>
       <p>Date: {element.date}</p>
       <p>Location: {element.location}</p>
+      {/*TODO: match report if null have the option to add */}
+      <button onClick={updateMatch(index)}>update info</button>
     </div>
+
   );
 }
+
+
+function updateMatch(index:number) {
+    axios
+        .post("http://localhost:8000/match", {
+          match_id: index
+        })
+        .then(function (response) {
+          console.log(response.data.token, "response.data.token");
+          if (response.data.token) {
+            
+          }
+        })
+        .catch(function (error) {
+          console.log(error, "error");
+        });
+  };
 
 
 

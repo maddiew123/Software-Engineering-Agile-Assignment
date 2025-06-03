@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Login from './Login'
 import Profile from './Profile'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import CreateNewMatch from './CreateNewMatch'
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ function App() {
     <Routes>
       <Route path="/" element = {<Login/>}/>
       <Route path="/profile" element = {<Profile/>}/>
+      <Route path="/new-match" element = {<CreateNewMatch/>}/>
     </Routes>
     </BrowserRouter>
     </QueryClientProvider>

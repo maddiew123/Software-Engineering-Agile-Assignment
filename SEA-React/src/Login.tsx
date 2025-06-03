@@ -12,6 +12,7 @@ export default function Login() {
 
   const login = () => {
     if ((username == "") && (password == "")) {
+      console.log("enter username")
       return;
     } else {
       axios
@@ -37,6 +38,7 @@ export default function Login() {
       <h1>login page</h1>
         {fetchToken() ? (
           <p>you are logged in</p>
+          
         ) : (
          
       <>
@@ -44,6 +46,7 @@ export default function Login() {
       <input
                   type="text"
                   onChange={(e) => setUsername(e.target.value)}
+                  
                 />
       <p>password</p>
       <input

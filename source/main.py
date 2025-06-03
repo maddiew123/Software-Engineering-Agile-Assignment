@@ -31,7 +31,7 @@ class User(Base):
 class Match(Base):
     __tablename__ = "match"
 
-    match_id = Column(Integer, primary_key=True, index=True)
+    match_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     location = Column (String)
     date = Column(Date)
     opponent_team_id = Column(Integer)
@@ -169,6 +169,42 @@ def get_team_name(team_id: int):
         return {"team_name": team.team_name}
     else:
         return {"team_name": "Unknown Team"}
+    
+
+@app.get("/team/")
+def get_team():
+    team = session.query(Team).all()
+    if team:
+        return {"teams": team}
+    else:
+        return {"teams": "Unknown Team"}
+
+class MatchItem(BaseModel):
+    location: str
+    date: date
+    opponent_team_id: int
+    home_team_id: int
+
+@app.get("/match/")
+def get_match():
+    match = session.query(Match).all()
+    if match:
+        return {"Match": match}
+    else:
+        return {"Match": "Unknown Match"}
+
+@app.post("/item/")
+async def create_match(match: MatchItem):
+    add_match = Match(
+        location=match.location,
+        date=match.date,
+        opponent_team_id=match.opponent_team_id,
+        home_team_id=match.home_team_id
+    )
+    session.add(add_match)
+    session.commit()
+    session.refresh(add_match)
+    return add_match
     
 @app.get("/match/{team_id}")
 def get_user_match(team_id: int):

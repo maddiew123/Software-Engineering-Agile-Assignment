@@ -7,6 +7,7 @@ export const setToken = (token : string)=>{
 }
 
 export const fetchToken = ()=>{
+    localStorage.removeItem("tokenya")
 
     return localStorage.getItem('tokenya')
 }
