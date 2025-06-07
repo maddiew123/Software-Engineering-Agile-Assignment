@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import StickyHeadTable from "./StickyHeadTable";
+import HeaderComponent from "./HeaderComponent";
 
 
 export default function ViewAllTeams() {
@@ -24,6 +25,7 @@ export default function ViewAllTeams() {
 
     return (
         <>
+        <HeaderComponent admin={true} loggedIn={true} />
             <p>ALL  TEAMS</p>
             {(allTeams.length == 0) ?
                 <p>no teams</p> :

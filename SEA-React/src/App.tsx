@@ -5,7 +5,7 @@ import Profile from './Profile'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import CreateNewMatch from './CreateNewMatch'
 import HeaderComponent from './HeaderComponent'
-import ViewAllPlayer from './ViewAllPlayer'
+
 import ViewAllTeams from './ViewAllTeams'
 
 const queryClient = new QueryClient();
@@ -23,7 +23,7 @@ function App() {
       <Route path="/" element = {<Login/>}/>
       <Route path="/profile" element = {<Profile/>}/>
       <Route path="/match/create" element = {<CreateNewMatch/>}/>
-      <Route path="/players" element = {<ViewAllPlayer/>}/>
+
       <Route path="/teams" element = {<ViewAllTeams/>}/>
     </Routes>
     </BrowserRouter>

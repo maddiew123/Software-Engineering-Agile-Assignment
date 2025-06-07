@@ -7,12 +7,19 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdminOptions from "./AdminOptions";
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function HeaderComponent({admin, loggedIn}:{admin:boolean,loggedIn:boolean}) { 
     const navigate = useNavigate()
     const signOut = () => {
         localStorage.removeItem("tokenya");
         navigate("/");
+        loggedIn=false;
+    };
+    const myMatches = () => {
+
+        navigate("/profile");
     };
 
 return (
@@ -23,7 +30,7 @@ return (
             Hockey Team
           </Typography>
           {(admin)&& <AdminOptions/>}
-          {(loggedIn) && <button className="signOut" onClick={signOut}>sign out</button>}
+          {(loggedIn) && <><button className="actions" onClick={myMatches}><PersonIcon/>My Matches</button><button className="signOut" onClick={signOut}><LogoutIcon/>sign out</button></>}
           
         </Toolbar>
       </AppBar>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { fetchToken, setToken } from "./Auth";
 import { useState } from "react";
 import "./Login.css"
+import HeaderComponent from "./HeaderComponent";
 
 
 export default function Login() {
@@ -34,7 +35,10 @@ export default function Login() {
   };
 
   return (
+    <>
+    <HeaderComponent admin={false}loggedIn={false} />
     <div className="wrapper">
+       
       <div className="box">
       <h1 className="title">Login Page</h1>
         {fetchToken() ? (
@@ -61,5 +65,7 @@ export default function Login() {
         )}
     </div>
     </div>
+    </>
+  
   );
 }

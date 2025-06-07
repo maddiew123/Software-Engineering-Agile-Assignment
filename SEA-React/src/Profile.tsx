@@ -47,6 +47,16 @@ export default function Profile() {
   useEffect(() => {
     const fetchUserMatches = async () => {
       if (team) {
+        if (admin) {
+          try {
+          const response = await fetch(`http://localhost:8000/match/`);
+          const data = await response.json();
+          console.error("Fetched All teams:", data);
+          setUserMatches(data.Match);
+        } catch (error) {
+          console.error("Error fetching All teams:", error);
+        }}
+        else {
         try {
           const response = await fetch(`http://localhost:8000/match/team/${team}`);
           const data = await response.json();
@@ -56,7 +66,7 @@ export default function Profile() {
           console.error("Error fetching teams:", error);
         }
       }
-    };
+        }}
 
     fetchUserMatches();
   }, [team]);
@@ -88,31 +98,7 @@ export default function Profile() {
     };
   };
 
-  // const handleUpdate = (index: number | null, updatedMatch: Match | null) => {
-  //   console.log("just one?", updatedMatch)
-
-  //   if (updatedMatch) {
-
-  //     setUserMatches((prevMatches) => {
-
-  //       if (index !== null && index >= 0 && index < prevMatches.length) {
-  //         const newMatches = [...prevMatches];
-  //         newMatches[index] = updatedMatch;
-  //         console.log("new", newMatches)
-  //         return newMatches;
-  //       } else {
-  //         return [...prevMatches, updatedMatch];
-  //       }
-  //     })
-  //   } else {
-  //     setUserMatches((prevMatches) => {
-  //       return prevMatches.filter((_, i) => i !== index);
-  //     });
-  //   }
-
-  //   ;
-  // };
-
+ 
   const fetchUsers = async () => {
     const res = await fetch("http://localhost:8000/")
     return res.json();
@@ -126,6 +112,7 @@ export default function Profile() {
   let admin: boolean = false
   if (role == "Manager") {
     admin = true
+    
   }
 
   return (
