@@ -4,19 +4,27 @@ import Login from './Login'
 import Profile from './Profile'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import CreateNewMatch from './CreateNewMatch'
+import HeaderComponent from './HeaderComponent'
+import ViewAllPlayer from './ViewAllPlayer'
+import ViewAllTeams from './ViewAllTeams'
 
 const queryClient = new QueryClient();
 
 function App() {
 
   return (
+
     <>
+   
       <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+       
     <Routes>
       <Route path="/" element = {<Login/>}/>
       <Route path="/profile" element = {<Profile/>}/>
-      <Route path="/new-match" element = {<CreateNewMatch/>}/>
+      <Route path="/match/create" element = {<CreateNewMatch/>}/>
+      <Route path="/players" element = {<ViewAllPlayer/>}/>
+      <Route path="/teams" element = {<ViewAllTeams/>}/>
     </Routes>
     </BrowserRouter>
     </QueryClientProvider>

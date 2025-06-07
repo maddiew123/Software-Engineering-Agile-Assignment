@@ -2,6 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { fetchToken, setToken } from "./Auth";
 import { useState } from "react";
+import "./Login.css"
 
 
 export default function Login() {
@@ -12,7 +13,6 @@ export default function Login() {
 
   const login = () => {
     if ((username == "") && (password == "")) {
-      console.log("enter username")
       return;
     } else {
       axios
@@ -34,8 +34,9 @@ export default function Login() {
   };
 
   return (
-    <>
-      <h1>login page</h1>
+    <div className="wrapper">
+      <div className="box">
+      <h1 className="title">Login Page</h1>
         {fetchToken() ? (
           <p>you are logged in</p>
           
@@ -50,7 +51,7 @@ export default function Login() {
                 />
       <p>password</p>
       <input
-                  type="text"
+                  type="password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
       <button type="button" onClick={login}>
@@ -58,6 +59,7 @@ export default function Login() {
                 </button>
       </>
         )}
-    </>
+    </div>
+    </div>
   );
 }
