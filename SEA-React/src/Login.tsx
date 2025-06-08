@@ -35,7 +35,7 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div className="background">
     <HeaderComponent admin={false}loggedIn={false} />
     <div className="wrapper">
        
@@ -65,7 +65,7 @@ export default function Login() {
         )}
     </div>
     </div>
-    </>
+    </div>
   
   );
 }

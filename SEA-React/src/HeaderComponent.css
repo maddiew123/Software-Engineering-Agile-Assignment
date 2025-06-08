@@ -1,4 +1,4 @@
-/* Header Container */
+
 .header {
   width: 100%;
   background-color: #3d1600;
@@ -19,15 +19,19 @@
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
-  font-size: 0.95rem;
+  font-size: small;
   cursor: pointer;
   transition: background-color 1s ease;
   margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .signOut:hover {
-  background-color: #005b4d;
-  color: #d7e2dd;
+  background-color:#d7e2dd ;
+  color:var(--primary-colour) ;
+  
 }
 
 .actions {
