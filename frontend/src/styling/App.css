@@ -1,0 +1,12 @@
+:root {
+ --primary-colour: #005b4d;
+ --button-hover: #002520;
+ /* --secondary-colour:
+ --font-light:
+ --font-dark:;
+ --error: */
+}
+
+#root {
+  background-color: rgb(255, 255, 255);
+}

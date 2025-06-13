@@ -1,0 +1,31 @@
+.cell {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+   
+}
+
+.delete {
+    color:rgb(219, 0, 0)
+}
+
+.create {
+    display: flex;
+    justify-content: flex-end;
+    padding:10px
+    
+}.createButton {
+ background-color: var(--primary-colour);
+ color:aliceblue;
+}
+
+.createButton:hover{
+     background-color: var(--button-hover);
+    color:aliceblue;
+}
+
