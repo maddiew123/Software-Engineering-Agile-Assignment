@@ -9,6 +9,4 @@ services:
     region: oregon
     branch: main
     autoDeploy: true
-    envVars:
-      - key: DATABASE_URL
-        value: your_postgres_url_from_render
+   
